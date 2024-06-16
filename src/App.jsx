@@ -1,21 +1,28 @@
 import './App.css'
-import { MainHeader } from './common/MainHeader'
-import { MainFooter } from './common/MainFooter'
-import { Nosotros } from './Home/Nosotros'
-import { Noticias } from './Home/Noticias'
-import { MainBanner } from './Home/MainBanner'
-import { Envios } from './Home/Envios'
+import { BrowserRouter, Routes, Route } from 'react-router-dom'
+import { MainHeader } from './common/MainHeader/MainHeader'
+import { MainFooter } from './common/MainFooter/MainFooter'
+import { MainNav } from './common/MainNav/MainNav'
+import { Inicio } from './pages/Inicio/Inicio'
+import { Proveedores } from './pages/Proveedores/Proveedores'
+import { Empleados } from './pages/Empleados/Empleados'
+import { Tienda } from './pages/Tienda/Tienda'
 
 function App() {
   return (
-    <>
+    <BrowserRouter>
       <MainHeader />
-      <MainBanner />
-      <Nosotros />
-      <Noticias />
-      <Envios />
+      <MainNav />
+      <main>
+        <Routes>
+          <Route path="/" element={<Inicio />} />
+          <Route path="/Proveedores" element={<Proveedores />} />
+          <Route path="/Empleados" element={<Empleados />} />
+          <Route path="/Tienda" element={<Tienda />} />
+        </Routes>
+      </main>
       <MainFooter />
-    </>
+    </BrowserRouter>
   )
 }
 

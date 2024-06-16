@@ -1,8 +1,9 @@
 import { useState, useEffect } from 'react'
+import { ApiWebURL } from '../../utils/index'
 
 function Envios() {
   const [listaEnvios, setListaEnvios] = useState([])
-  const rutaServicio = 'https://servicios.campus.pe/envios.php'
+  const rutaServicio = ApiWebURL + '/envios.php'
 
   useEffect(() => {
     leerServicio()
@@ -12,7 +13,6 @@ function Envios() {
     try {
       const response = await fetch(rutaServicio)
       const data = await response.json()
-      console.log(data)
       setListaEnvios(data)
     } catch (error) {
       console.error('Error fetching data:', error)

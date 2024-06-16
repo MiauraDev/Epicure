@@ -1,6 +1,6 @@
-import slide1 from './../assets/images/banner1.jpg'
-import slide2 from './../assets/images/banner2.jpg'
-import slide3 from './../assets/images/banner3.jpg'
+import slide1 from './../../assets/images/banner1.jpg'
+import slide2 from './../../assets/images/banner2.jpg'
+import slide3 from './../../assets/images/banner3.jpg'
 
 function MainBanner() {
   return (

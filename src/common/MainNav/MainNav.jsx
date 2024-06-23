@@ -1,4 +1,5 @@
 import { Link } from 'react-router-dom'
+
 function MainNav() {
   return (
     <nav className="navbar navbar-expand-lg bg-body-tertiary">
@@ -20,33 +21,30 @@ function MainNav() {
         <div className="collapse navbar-collapse" id="navbarNav">
           <ul className="navbar-nav me-auto">
             <li className="nav-item">
-              <Link className="nav-link" to="/Proveedores">
+              <Link className="nav-link" to="/proveedores">
                 Proveedores
               </Link>
             </li>
             <li className="nav-item">
-              <Link className="nav-link" to="/Empleados">
+              <Link className="nav-link" to="/empleados">
                 Empleados
               </Link>
             </li>
             <li className="nav-item">
-              <Link className="nav-link" to="/Tienda">
+              <Link className="nav-link" to="/tienda">
                 Tienda
               </Link>
             </li>
           </ul>
-
           <ul className="navbar-nav">
             <li className="nav-item">
-              <Link className="nav-link" to="/Carrito">
-                <i className="bi bi-basket" />
-                Carrito
+              <Link className="nav-link" to="/carrito">
+                <i className="bi bi-basket"></i> Carrito
               </Link>
             </li>
             <li className="nav-item">
-              <Link className="nav-link" to="/#">
-                <i className="bi bi-person" />
-                Iniciar sesión
+              <Link className="nav-link" to="/">
+                <i className="bi bi-person"></i> Iniciar sesión
               </Link>
             </li>
           </ul>

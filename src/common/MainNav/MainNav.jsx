@@ -18,7 +18,7 @@ function MainNav() {
           <span className="navbar-toggler-icon"></span>
         </button>
         <div className="collapse navbar-collapse" id="navbarNav">
-          <ul className="navbar-nav">
+          <ul className="navbar-nav me-auto">
             <li className="nav-item">
               <Link className="nav-link" to="/Proveedores">
                 Proveedores
@@ -32,6 +32,21 @@ function MainNav() {
             <li className="nav-item">
               <Link className="nav-link" to="/Tienda">
                 Tienda
+              </Link>
+            </li>
+          </ul>
+
+          <ul className="navbar-nav">
+            <li className="nav-item">
+              <Link className="nav-link" to="/Carrito">
+                <i className="bi bi-basket" />
+                Carrito
+              </Link>
+            </li>
+            <li className="nav-item">
+              <Link className="nav-link" to="/#">
+                <i className="bi bi-person" />
+                Iniciar sesión
               </Link>
             </li>
           </ul>

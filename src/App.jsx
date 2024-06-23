@@ -7,6 +7,8 @@ import { Inicio } from './pages/Inicio/Inicio'
 import { Proveedores } from './pages/Proveedores/Proveedores'
 import { Empleados } from './pages/Empleados/Empleados'
 import { Tienda } from './pages/Tienda/Tienda'
+import { ProductoDetalle } from './pages/ProductoDetalle/ProductoDetalle'
+import { Carrito } from './pages/Carrito/Carrito'
 
 function App() {
   return (
@@ -19,6 +21,11 @@ function App() {
           <Route path="/Proveedores" element={<Proveedores />} />
           <Route path="/Empleados" element={<Empleados />} />
           <Route path="/Tienda" element={<Tienda />} />
+          <Route
+            path="/ProductoDetalle/:idproducto"
+            element={<ProductoDetalle />}
+          />
+          <Route path="/Carrito" element={<Carrito />} />
         </Routes>
       </main>
       <MainFooter />

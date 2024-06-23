@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
 import { ApiWebURL } from '../../utils'
-import Productos from '../../components/Productos/Productos'
+import { Productos } from '../../components/Productos/Productos'
 
 function Tienda() {
   const [listaCategorias, setListaCategorias] = useState([])
@@ -16,6 +16,7 @@ function Tienda() {
       .then((response) => response.json())
       .then((data) => {
         setListaCategorias(data)
+        seleccionarCategoria(data[0])
       })
   }
 
@@ -51,11 +52,11 @@ function Tienda() {
       <div className="container">
         <h2>Tienda</h2>
         <div className="row">
-          <div className="col-3">
+          <div className="col-3 col-md-4">
             <h3>Categorías</h3>
             {dibujarLista()}
           </div>
-          <div className="col-9">
+          <div className="col-9 col-md-8">
             {categoriaSeleccionada ? (
               <>
                 <h3>{categoriaSeleccionada.nombre}</h3>

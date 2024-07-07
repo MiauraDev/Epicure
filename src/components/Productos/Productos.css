@@ -47,3 +47,13 @@
 .iconocarrito:hover {
   color: var(--color5);
 }
+
+.vista-rapida{
+  width: 250px;                      
+  height: 250px;
+}
+
+.detalle-producto{
+  width: 420px;                      
+  height: 420px;
+}

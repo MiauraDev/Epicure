@@ -7,52 +7,21 @@ function ProductoDetalle() {
   const params = useParams()
   console.log(params)
 
-  const [productoSeleccionado, setProductoSeleccionado] = useState(null) // Inicializa como null
-  const [error, setError] = useState(null)
+  const [productoSeleccionado, setProductoSeleccionado] = useState([])
 
   useEffect(() => {
-    if (params.idproducto) {
-      leerServicio(params.idproducto)
-    }
-  }, [params.idproducto])
+    leerServicio()
+  }, [])
 
-  const leerServicio = (idproducto) => {
-    const rutaServicio = `${ApiWebURL}productos.php?idproducto=${idproducto}`
+  const leerServicio = () => {
+    const rutaServicio =
+      ApiWebURL + 'productos.php?idproducto=' + params.idproducto
     fetch(rutaServicio)
       .then((response) => response.json())
       .then((data) => {
         console.log(data)
-        if (data.length > 0) {
-          setProductoSeleccionado(data[0])
-        } else {
-          setError('Producto no encontrado')
-        }
+        setProductoSeleccionado(data[0])
       })
-      .catch((error) => {
-        setError('Error al cargar los datos')
-        console.error('Error fetching product:', error)
-      })
-  }
-
-  if (error) {
-    return (
-      <section className="padded">
-        <div className="container">
-          <h2>Error</h2>
-          <p>{error}</p>
-        </div>
-      </section>
-    )
-  }
-
-  if (!productoSeleccionado) {
-    return (
-      <section className="padded">
-        <div className="container">
-          <h2>Cargando...</h2>
-        </div>
-      </section>
-    )
   }
 
   return (
@@ -63,52 +32,49 @@ function ProductoDetalle() {
           <div className="col">
             <img
               src={
-                productoSeleccionado.imagengrande == null
+                productoSeleccionado.imagengrande === null
                   ? nofoto
-                  : `${ApiWebURL}${productoSeleccionado.imagengrande}`
+                  : ApiWebURL + productoSeleccionado.imagengrande
               }
-              className="img-fluid"
+              className="img-fluid detalle-producto"
               alt={productoSeleccionado.nombre}
             />
           </div>
           <div className="col">
             <table className="table">
-              <tbody>
-                <tr>
-                  <th>Detalle</th>
-                  <td>{productoSeleccionado.detalle}</td>
-                </tr>
-                <tr>
-                  <th>Proveedor</th>
-                  <td>{productoSeleccionado.proveedor}</td>
-                </tr>
-                <tr>
-                  <th>Stock</th>
-                  <td>{productoSeleccionado.unidadesenexistencia}</td>
-                </tr>
-                <tr>
-                  <th>Precio</th>
-                  <td>
-                    S/{' '}
+              <tr>
+                <th>Detalle</th>
+                <td>{productoSeleccionado.detalle}</td>
+              </tr>
+              <tr>
+                <th>Proveedor</th>
+                <td>{productoSeleccionado.proveedor}</td>
+              </tr>
+              <tr>
+                <th>Stock</th>
+                <td>{productoSeleccionado.unidadesenexistencia}</td>
+              </tr>
+              <tr>
+                <th>Precio</th>
+                <td>
+                  S/{' '}
+                  {productoSeleccionado.preciorebajado === '0'
+                    ? parseFloat(productoSeleccionado.precio).toFixed(2)
+                    : parseFloat(productoSeleccionado.preciorebajado).toFixed(
+                        2
+                      )}
+                  <span className="precio-anterior">
                     {productoSeleccionado.preciorebajado === '0'
-                      ? parseFloat(productoSeleccionado.precio).toFixed(2)
-                      : parseFloat(productoSeleccionado.preciorebajado).toFixed(
-                          2
-                        )}
-                    <span className="precio-anterior">
-                      {productoSeleccionado.preciorebajado === '0'
-                        ? ''
-                        : `S/ ${parseFloat(productoSeleccionado.precio).toFixed(
-                            2
-                          )}`}
-                    </span>
-                  </td>
-                </tr>
-                <tr>
-                  <th>País</th>
-                  <td>{productoSeleccionado.pais}</td>
-                </tr>
-              </tbody>
+                      ? ''
+                      : 'S/ ' +
+                        parseFloat(productoSeleccionado.precio).toFixed(2)}
+                  </span>
+                </td>
+              </tr>
+              <tr>
+                <th>Paìs</th>
+                <td>{productoSeleccionado.pais}</td>
+              </tr>
             </table>
             <h3>Descripción</h3>
             <div

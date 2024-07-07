@@ -1,8 +1,13 @@
+// MainNav.jsx
+import React, { useContext } from 'react'
 import { Link } from 'react-router-dom'
+import { CartContext } from '../../components/CartContext'
 
 function MainNav() {
+  const { cartCount } = useContext(CartContext)
+
   return (
-    <nav className="navbar navbar-expand-lg bg-body-tertiary">
+    <nav className="navbar navbar-expand-lg bg-body-tertiary sticky-top">
       <div className="container">
         <Link className="navbar-brand" to="/">
           ID+
@@ -31,20 +36,25 @@ function MainNav() {
               </Link>
             </li>
             <li className="nav-item">
-              <Link className="nav-link" to="/tienda">
-                Tienda
+              <Link className="nav-link" to="/directores">
+                Directores
+              </Link>
+            </li>
+            <li className="nav-item">
+              <Link className="nav-link" to="/futbol">
+                Futbol
               </Link>
             </li>
           </ul>
           <ul className="navbar-nav">
             <li className="nav-item">
               <Link className="nav-link" to="/carrito">
-                <i className="bi bi-basket"></i> Carrito
+                <i className="bi bi-basket"></i> Carrito ({cartCount})
               </Link>
             </li>
             <li className="nav-item">
-              <Link className="nav-link" to="/">
-                <i className="bi bi-person"></i> Iniciar sesión
+              <Link className="nav-link" to="/tienda">
+                Tienda
               </Link>
             </li>
           </ul>

@@ -1,15 +1,15 @@
-/* eslint-disable react/prop-types */
-import { useEffect, useState } from 'react'
+import React, { useEffect, useState, useContext } from 'react'
 import { ApiWebURL, agregarCarrito } from '../../utils/index'
 import './Productos.css'
 import nofoto from '../../assets/images/nofoto.jpg'
 import { Link } from 'react-router-dom'
+import { CartContext } from '../CartContext'
 
 function Productos(props) {
-  console.log(props)
-
   const [listaProductos, setListaProductos] = useState([])
   const [productoSeleccionado, setProductoSeleccionado] = useState([])
+  const [cantidadProducto, setCantidadProducto] = useState(1)
+  const { incrementCartCount } = useContext(CartContext)
 
   useEffect(() => {
     leerServicio(props.codigoCategoria)
@@ -20,7 +20,6 @@ function Productos(props) {
     fetch(rutaServicio)
       .then((response) => response.json())
       .then((data) => {
-        console.log(data)
         setListaProductos(data)
       })
   }
@@ -30,6 +29,7 @@ function Productos(props) {
       .querySelector('.icono-vista-rapida')
       .classList.add('icono-vista-rapida-mostrar')
   }
+
   const ocultarVistaRapida = (event) => {
     event.currentTarget
       .querySelector('.icono-vista-rapida')
@@ -41,9 +41,13 @@ function Productos(props) {
     fetch(rutaServicio)
       .then((response) => response.json())
       .then((data) => {
-        console.log(data)
         setProductoSeleccionado(data[0])
       })
+  }
+
+  const agregarAlCarrito = (item) => {
+    agregarCarrito(item, 1)
+    incrementCartCount() // Incrementar el contador
   }
 
   const dibujarCuadricula = () => {
@@ -53,15 +57,15 @@ function Productos(props) {
           <div className="col" key={item.idproducto}>
             <div
               className="card text-center h-100"
-              onMouseEnter={(event) => mostrarVistaRapida(event)}
-              onMouseLeave={(event) => ocultarVistaRapida(event)}
+              onMouseEnter={mostrarVistaRapida}
+              onMouseLeave={ocultarVistaRapida}
             >
-              <Link to={`/ProductoDetalle/${item.idproducto}`}>
+              <Link to={'/productodetalle/' + item.idproducto}>
                 <img
                   src={
                     item.imagenchica === null
                       ? nofoto
-                      : `${ApiWebURL}${item.imagenchica}`
+                      : ApiWebURL + item.imagenchica
                   }
                   className="card-img-top"
                   alt={item.nombre}
@@ -86,10 +90,10 @@ function Productos(props) {
 
               <div className="card-body">
                 <p className="card-title">
-                  {item.nombre}{' '}
+                  {item.nombre}
                   <i
                     className="bi bi-basket iconocarrito"
-                    onClick={() => agregarCarrito(item)}
+                    onClick={() => agregarAlCarrito(item)}
                     title="Añadir al carrito"
                   ></i>
                 </p>
@@ -137,49 +141,67 @@ function Productos(props) {
             <div className="modal-body">
               <div className="row">
                 <div className="col">
-                  <img
-                    src={
-                      productoSeleccionado.imagengrande === null
-                        ? nofoto
-                        : ApiWebURL + productoSeleccionado.imagengrande
-                    }
-                    className="img-fluid"
-                    alt={productoSeleccionado.nombre}
-                  />
+                  <div className="d-flex justify-content-center align-items-center">
+                    <img
+                      src={
+                        productoSeleccionado.imagengrande === null
+                          ? nofoto
+                          : ApiWebURL + productoSeleccionado.imagengrande
+                      }
+                      className="img-fluid vista-rapida"
+                      alt={productoSeleccionado.nombre}
+                    />
+                  </div>
                 </div>
                 <div className="col">
                   <table className="table">
-                    <tr>
-                      <th>Detalle</th>
-                      <td>{productoSeleccionado.detalle}</td>
-                    </tr>
-                    <tr>
-                      <th>Proveedor</th>
-                      <td>{productoSeleccionado.proveedor}</td>
-                    </tr>
-                    <tr>
-                      <th>Stock</th>
-                      <td>{productoSeleccionado.unidadesenexistencia}</td>
-                    </tr>
-                    <tr>
-                      <th>Precio</th>
-                      <td>
-                        S/{' '}
-                        {productoSeleccionado.preciorebajado === '0'
-                          ? parseFloat(productoSeleccionado.precio).toFixed(2)
-                          : parseFloat(
-                              productoSeleccionado.preciorebajado
-                            ).toFixed(2)}
-                        <span className="precio-anterior">
+                    <tbody>
+                      <tr>
+                        <th>Detalle</th>
+                        <td>{productoSeleccionado.detalle}</td>
+                      </tr>
+                      <tr>
+                        <th>Proveedor</th>
+                        <td>{productoSeleccionado.proveedor}</td>
+                      </tr>
+                      <tr>
+                        <th>Stock</th>
+                        <td>{productoSeleccionado.unidadesenexistencia}</td>
+                      </tr>
+                      <tr>
+                        <th>Precio</th>
+                        <td>
+                          S/{' '}
                           {productoSeleccionado.preciorebajado === '0'
-                            ? ''
-                            : 'S/ ' +
-                              parseFloat(productoSeleccionado.precio).toFixed(
-                                2
-                              )}
-                        </span>
-                      </td>
-                    </tr>
+                            ? parseFloat(productoSeleccionado.precio).toFixed(2)
+                            : parseFloat(
+                                productoSeleccionado.preciorebajado
+                              ).toFixed(2)}
+                          <span className="precio-anterior">
+                            {productoSeleccionado.preciorebajado === '0'
+                              ? ''
+                              : 'S/ ' +
+                                parseFloat(productoSeleccionado.precio).toFixed(
+                                  2
+                                )}
+                          </span>
+                        </td>
+                      </tr>
+                      <tr>
+                        <th>Cantidad</th>
+                        <td>
+                          <input
+                            type="number"
+                            className="form-control"
+                            value={cantidadProducto}
+                            onChange={(event) =>
+                              setCantidadProducto(event.target.value)
+                            }
+                            min="1"
+                          />
+                        </td>
+                      </tr>
+                    </tbody>
                   </table>
                 </div>
               </div>
@@ -192,7 +214,15 @@ function Productos(props) {
               >
                 Cerrar
               </button>
-              <button type="button" className="btn btn-primary">
+              <button
+                type="button"
+                className="btn btn-primary"
+                data-bs-dismiss="modal"
+                onClick={() => {
+                  agregarAlCarrito(productoSeleccionado)
+                  setCantidadProducto(1)
+                }}
+              >
                 Añadir al carrito
               </button>
             </div>

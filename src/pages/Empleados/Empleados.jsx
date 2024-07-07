@@ -51,5 +51,4 @@ function Empleados() {
     </section>
   )
 }
-
 export { Empleados }

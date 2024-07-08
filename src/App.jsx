@@ -1,8 +1,9 @@
-import './App.css'
-import { BrowserRouter, Routes, Route } from 'react-router-dom'
+import React from 'react'
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
+import { CartProvider } from './components/CartContext'
 import { MainHeader } from './common/MainHeader/MainHeader'
-import { MainFooter } from './common/MainFooter/MainFooter'
 import { MainNav } from './common/MainNav/MainNav'
+import { MainFooter } from './common/MainFooter/MainFooter'
 import { Inicio } from './pages/Inicio/Inicio'
 import { Proveedores } from './pages/Proveedores/Proveedores'
 import { Empleados } from './pages/Empleados/Empleados'
@@ -11,14 +12,11 @@ import { ProductoDetalle } from './pages/ProductoDetalle/ProductoDetalle'
 import { Carrito } from './pages/Carrito/Carrito'
 import { Directores } from './pages/Directores/Directores'
 import { Futbol } from './pages/Futbol/Futbol'
-import { CartProvider } from './components/CartContext'
 
 function App() {
   return (
-    <BrowserRouter>
+    <Router>
       <CartProvider>
-        {' '}
-        {/* CartProvider debe estar directamente bajo BrowserRouter */}
         <MainHeader />
         <MainNav />
         <main>
@@ -38,7 +36,7 @@ function App() {
         </main>
         <MainFooter />
       </CartProvider>
-    </BrowserRouter>
+    </Router>
   )
 }
 

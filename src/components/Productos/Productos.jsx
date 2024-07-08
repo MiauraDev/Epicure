@@ -3,13 +3,13 @@ import { ApiWebURL, agregarCarrito } from '../../utils/index'
 import './Productos.css'
 import nofoto from '../../assets/images/nofoto.jpg'
 import { Link } from 'react-router-dom'
-import { CartContext } from '../CartContext'
+import { CartContext } from '../../components/CartContext'
 
 function Productos(props) {
+  const { addItem, incrementCartCount } = useContext(CartContext)
   const [listaProductos, setListaProductos] = useState([])
   const [productoSeleccionado, setProductoSeleccionado] = useState([])
   const [cantidadProducto, setCantidadProducto] = useState(1)
-  const { incrementCartCount } = useContext(CartContext)
 
   useEffect(() => {
     leerServicio(props.codigoCategoria)
@@ -47,7 +47,8 @@ function Productos(props) {
 
   const agregarAlCarrito = (item) => {
     agregarCarrito(item, 1)
-    incrementCartCount() // Incrementar el contador
+    addItem(item, 1) // Añade el producto al carrito global
+    incrementCartCount() // Incrementa el contador al añadir un producto
   }
 
   const dibujarCuadricula = () => {

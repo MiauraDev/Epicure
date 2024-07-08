@@ -1,21 +1,9 @@
-import { useEffect, useState } from 'react'
+import React, { useContext } from 'react'
+import { CartContext } from '../../components/CartContext'
 
 function Carrito() {
-  const [listaItems, setListaItems] = useState([])
-  const [total, setTotal] = useState(0)
-
-  useEffect(() => {
-    leerServicio()
-  }, [])
-
-  const leerServicio = () => {
-    const datosCarrito = JSON.parse(sessionStorage.getItem('carritocompras'))
-    setListaItems(datosCarrito)
-    console.log(datosCarrito)
-    if (datosCarrito != null) {
-      calcularTotal(datosCarrito)
-    }
-  }
+  const { cartItems, total, eliminarItem, vaciarCarrito } =
+    useContext(CartContext)
 
   const dibujarTabla = () => {
     return (
@@ -31,8 +19,8 @@ function Carrito() {
           </tr>
         </thead>
         <tbody>
-          {listaItems !== null ? (
-            listaItems.map((item) => (
+          {cartItems.length > 0 ? (
+            cartItems.map((item) => (
               <tr key={item.idproducto}>
                 <td>{item.idproducto}</td>
                 <td>{item.nombre}</td>
@@ -42,53 +30,40 @@ function Carrito() {
                   {(item.precio * item.cantidad).toFixed(2)}
                 </td>
                 <td className="text-center">
-                  <i
-                    className="bi bi-x-lg icono-eliminar"
+                  <button
+                    className="btn btn-link icono-eliminar"
                     title="Eliminar"
                     onClick={() => eliminarItem(item)}
-                  ></i>
+                  >
+                    <i className="bi bi-x-lg"></i>
+                  </button>
                 </td>
               </tr>
             ))
           ) : (
-            <div className="alert alert-warning" role="alert">
-              Su carrito de compras está actualmente vacío
-            </div>
+            <tr>
+              <td colSpan="6">
+                <div className="alert alert-warning" role="alert">
+                  Su carrito de compras está actualmente vacío
+                </div>
+              </td>
+            </tr>
           )}
         </tbody>
         <tfoot>
           <tr>
-            <th colSpan="4" className="text-end">
+            <th colSpan="3" className="text-end">
               Total
             </th>
+            <th className="text-end">
+              {cartItems.reduce((acc, item) => acc + item.cantidad, 0)}
+            </th>
             <th className="text-end">{total.toFixed(2)}</th>
+            <th></th>
           </tr>
         </tfoot>
       </table>
     )
-  }
-
-  const eliminarItem = (item) => {
-    let carritoMenos = listaItems.filter(
-      (itemCart) => itemCart.idproducto !== item.idproducto
-    )
-    setListaItems(carritoMenos)
-    sessionStorage.setItem('carritocompras', JSON.stringify(carritoMenos))
-    calcularTotal(carritoMenos)
-  }
-
-  const calcularTotal = (datosCarrito) => {
-    let sumaTotal = datosCarrito.reduce(
-      (acumulador, fila) => acumulador + fila['precio'] * fila['cantidad'],
-      0
-    )
-    setTotal(sumaTotal)
-  }
-
-  const vaciarCarrito = () => {
-    setListaItems([])
-    sessionStorage.removeItem('carritocompras')
-    setTotal(0)
   }
 
   return (
@@ -97,10 +72,11 @@ function Carrito() {
         <h2>Carrito de compras</h2>
         {dibujarTabla()}
         <button className="btn btn-danger" onClick={() => vaciarCarrito()}>
-          Vaciar carrtito
+          Vaciar carrito
         </button>
       </div>
     </section>
   )
 }
+
 export { Carrito }

@@ -1,4 +1,3 @@
-// MainNav.jsx
 import React, { useContext } from 'react'
 import { Link } from 'react-router-dom'
 import { CartContext } from '../../components/CartContext'

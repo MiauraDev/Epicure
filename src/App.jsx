@@ -19,21 +19,20 @@ function App() {
       <CartProvider>
         <MainHeader />
         <MainNav />
-        <main>
-          <Routes>
-            <Route path="/" element={<Inicio />} />
-            <Route path="/proveedores" element={<Proveedores />} />
-            <Route path="/empleados" element={<Empleados />} />
-            <Route
-              path="/productoDetalle/:idproducto"
-              element={<ProductoDetalle />}
-            />
-            <Route path="/carrito" element={<Carrito />} />
-            <Route path="/tienda" element={<Tienda />} />
-            <Route path="/directores" element={<Directores />} />
-            <Route path="/futbol" element={<Futbol />} />
-          </Routes>
-        </main>
+        <Routes>
+          <Route path="/" element={<Inicio />} />
+          <Route path="/Proveedores" element={<Proveedores />} />
+          <Route path="/Empleados" element={<Empleados />} />
+          <Route
+            path="/ProductoDetalle/:idproducto"
+            element={<ProductoDetalle />}
+          />
+          <Route path="/Carrito" element={<Carrito />} />
+          <Route path="/Tienda" element={<Tienda />} />
+          <Route path="/Directores" element={<Directores />} />
+          <Route path="/Futbol" element={<Futbol />} />
+        </Routes>
+
         <MainFooter />
       </CartProvider>
     </Router>

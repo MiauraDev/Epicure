@@ -1,4 +1,3 @@
-import React from 'react'
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
 import { CartProvider } from './components/CartContext'
 import { MainHeader } from './common/MainHeader/MainHeader'
@@ -21,18 +20,17 @@ function App() {
         <MainNav />
         <Routes>
           <Route path="/" element={<Inicio />} />
-          <Route path="/Proveedores" element={<Proveedores />} />
-          <Route path="/Empleados" element={<Empleados />} />
+          <Route path="/proveedores" element={<Proveedores />} />
+          <Route path="/empleados" element={<Empleados />} />
           <Route
-            path="/ProductoDetalle/:idproducto"
+            path="/productoDetalle/:idproducto"
             element={<ProductoDetalle />}
           />
-          <Route path="/Carrito" element={<Carrito />} />
-          <Route path="/Tienda" element={<Tienda />} />
-          <Route path="/Directores" element={<Directores />} />
-          <Route path="/Futbol" element={<Futbol />} />
+          <Route path="/carrito" element={<Carrito />} />
+          <Route path="/tienda" element={<Tienda />} />
+          <Route path="/directores" element={<Directores />} />
+          <Route path="/futbol" element={<Futbol />} />
         </Routes>
-
         <MainFooter />
       </CartProvider>
     </Router>

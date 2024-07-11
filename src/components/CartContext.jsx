@@ -29,7 +29,10 @@ const CartProvider = ({ children }) => {
 
   const calcularTotal = (datosCarrito) => {
     const sumaTotal = datosCarrito.reduce(
-      (acumulador, fila) => acumulador + fila.precio * fila.cantidad,
+      (acumulador, fila) =>
+        fila.tipo === 'empleado'
+          ? acumulador + fila.precio * fila.cantidad
+          : acumulador,
       0
     )
     setTotal(sumaTotal)
@@ -37,7 +40,7 @@ const CartProvider = ({ children }) => {
 
   const eliminarItem = (item) => {
     const carritoMenos = cartItems.filter(
-      (itemCart) => itemCart.idproducto !== item.idproducto
+      (itemCart) => itemCart.id !== item.id || itemCart.tipo !== item.tipo
     )
     setCartItems(carritoMenos)
     sessionStorage.setItem('carritocompras', JSON.stringify(carritoMenos))
@@ -54,11 +57,11 @@ const CartProvider = ({ children }) => {
 
   const addItem = (item, cantidad) => {
     const existingItem = cartItems.find(
-      (cartItem) => cartItem.idproducto === item.idproducto
+      (cartItem) => cartItem.id === item.id && cartItem.tipo === item.tipo
     )
     if (existingItem) {
       const updatedItems = cartItems.map((cartItem) =>
-        cartItem.idproducto === item.idproducto
+        cartItem.id === item.id && cartItem.tipo === item.tipo
           ? { ...cartItem, cantidad: cartItem.cantidad + cantidad }
           : cartItem
       )
@@ -76,7 +79,7 @@ const CartProvider = ({ children }) => {
   }
 
   const incrementCartCount = () => {
-    setCartCount((prevCount) => prevCount)
+    setCartCount((prevCount) => prevCount + 1)
   }
 
   return (

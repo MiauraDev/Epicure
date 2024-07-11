@@ -1,15 +1,13 @@
 import { Nosotros } from '../../home/Nosotros/Nosotros'
-import { Noticias } from '../../home/Noticias/Noticias'
+import { Galeria } from '../../home/Galeria/Galeria'
 import { MainBanner } from '../../home/MainBanner/MainBanner'
-import { Envios } from '../../home/Envios/Envios'
 
 function Inicio() {
   return (
     <>
       <MainBanner />
+      <Galeria />
       <Nosotros />
-      <Noticias />
-      <Envios />
     </>
   )
 }

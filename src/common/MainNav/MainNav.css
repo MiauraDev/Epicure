@@ -1,0 +1,41 @@
+.logo{
+    letter-spacing: 2px;
+    font-weight: 500;
+    color: var(--primary);
+    display: flex;
+    gap: 2px;
+    justify-content: center;
+    align-items: center;
+    margin-top: -7px;
+}
+
+.logo img{
+    width: 18px;
+    height: 18px;
+    padding: 0px;
+}
+
+.logo p{
+    margin: 0;
+    padding: 0px;
+    padding-top: 7px;
+}
+
+.seleccionados{
+    font-size: 20px;
+    display: flex;
+    gap: 4px;
+}
+
+.bolita {
+    display: inline-block;
+    font-weight: 500;
+    width: 20px;
+    height: 20px;
+    background-color: var(--primary); 
+    color: var(--color-blanco);
+    text-align: center;
+    line-height: 20px; 
+    font-size: 12px;
+  }
+  

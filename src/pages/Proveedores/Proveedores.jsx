@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react'
 import { ApiWebURL } from '../../utils/index'
+import './Proveedores.css'
 
 function Proveedores() {
   const [listaProveedores, setListaProveedores] = useState([])
@@ -11,6 +12,7 @@ function Proveedores() {
   const [pagina, setPagina] = useState(0)
   const [estadoAscendente, setEstadoAscendente] = useState(1)
   const [columnaAnterior, setColumnaAnterior] = useState('')
+  const [proveedorSeleccionado, setProveedorSeleccionado] = useState(null)
 
   useEffect(() => {
     leerServicio()
@@ -21,7 +23,6 @@ function Proveedores() {
     fetch(rutaServicio)
       .then((response) => response.json())
       .then((data) => {
-        console.log(data)
         setListaProveedores(data)
         setListaProveedoresFiltrados(data)
         setTotalFilas(data.length)
@@ -30,7 +31,6 @@ function Proveedores() {
   }
 
   const seleccionarColumna = (event, columna) => {
-    console.log(columna)
     let iconosOrden = document.querySelectorAll('#tabla-proveedores th i')
     iconosOrden.forEach((item) => item.remove())
 
@@ -56,38 +56,55 @@ function Proveedores() {
 
   const dibujarTabla = () => {
     return (
-      <table className="table" id="tabla-proveedores">
-        <thead>
-          <tr>
-            <th>Código</th>
-            <th onClick={(event) => seleccionarColumna(event, 'nombreempresa')}>
-              Empresa
-            </th>
-            <th
-              onClick={(event) => seleccionarColumna(event, 'nombrecontacto')}
-            >
-              Contacto
-            </th>
-            <th onClick={(event) => seleccionarColumna(event, 'ciudad')}>
-              Ciudad
-            </th>
-            <th onClick={(event) => seleccionarColumna(event, 'pais')}>País</th>
-          </tr>
-        </thead>
-        <tbody>
-          {listaProveedoresFiltrados
-            .slice(pagina * filasPagina, (pagina + 1) * filasPagina)
-            .map((item) => (
-              <tr key={item.idproveedor}>
-                <td>{item.idproveedor}</td>
-                <td>{item.nombreempresa}</td>
-                <td>{item.nombrecontacto}</td>
-                <td>{item.ciudad}</td>
-                <td>{item.pais}</td>
-              </tr>
-            ))}
-        </tbody>
-      </table>
+      <div className="table-container">
+        <table className="table pedidosTable" id="tabla-proveedores">
+          <thead>
+            <tr>
+              <th>Código</th>
+              <th
+                onClick={(event) => seleccionarColumna(event, 'nombreempresa')}
+              >
+                Empresa
+              </th>
+              <th
+                onClick={(event) => seleccionarColumna(event, 'nombrecontacto')}
+              >
+                Contacto
+              </th>
+              <th onClick={(event) => seleccionarColumna(event, 'ciudad')}>
+                Ciudad
+              </th>
+              <th onClick={(event) => seleccionarColumna(event, 'pais')}>
+                País
+              </th>
+              <th>Ver</th>
+            </tr>
+          </thead>
+          <tbody>
+            {listaProveedoresFiltrados
+              .slice(pagina * filasPagina, (pagina + 1) * filasPagina)
+              .map((item) => (
+                <tr key={item.idproveedor}>
+                  <td>{item.idproveedor}</td>
+                  <td>{item.nombreempresa}</td>
+                  <td>{item.nombrecontacto}</td>
+                  <td>{item.ciudad}</td>
+                  <td>{item.pais}</td>
+                  <td>
+                    <button
+                      className="btn btn-link eye"
+                      onClick={() => setProveedorSeleccionado(item)}
+                      data-bs-toggle="modal"
+                      data-bs-target="#verProveedorModal"
+                    >
+                      <i className="bi bi-eye eyes"></i>
+                    </button>
+                  </td>
+                </tr>
+              ))}
+          </tbody>
+        </table>
+      </div>
     )
   }
 
@@ -111,13 +128,13 @@ function Proveedores() {
         <ul className="pagination">
           <li className="page-item">
             <a className="page-link" href="#" onClick={() => retroceder()}>
-              Retroceder
+              ◀
             </a>
           </li>
           {dibujarNumerosPaginacion()}
           <li className="page-item">
             <a className="page-link" href="#" onClick={() => avanzar()}>
-              Avanzar
+              ▶
             </a>
           </li>
         </ul>
@@ -168,6 +185,59 @@ function Proveedores() {
         </div>
         {dibujarTabla()}
         {dibujarPaginacion()}
+
+        {proveedorSeleccionado && (
+          <div
+            className="modal fade"
+            id="verProveedorModal"
+            tabIndex="-1"
+            aria-labelledby="verProveedorModalLabel"
+            aria-hidden="true"
+          >
+            <div className="modal-dialog modal-dialog-centered">
+              <div className="modal-content modal-proveedores">
+                <div className="modal-header">
+                  <h5
+                    className="modal-title proveedor"
+                    id="verProveedorModalLabel"
+                  >
+                    Datos del Proveedor
+                  </h5>
+                </div>
+                <div className="modal-body">
+                  <br />
+                  <p className="text-center name-empresa">
+                    {proveedorSeleccionado.nombreempresa}
+                  </p>
+                  <p>
+                    <strong>Contacto:</strong>{' '}
+                    {proveedorSeleccionado.nombrecontacto}
+                  </p>
+                  <p>
+                    <strong>Cargo:</strong>{' '}
+                    {proveedorSeleccionado.cargocontacto}
+                  </p>
+                  <p>
+                    <strong>Telefono:</strong> {proveedorSeleccionado.telefono}
+                  </p>
+                  <p>
+                    <strong>Ubicación:</strong> {proveedorSeleccionado.pais} |{' '}
+                    {proveedorSeleccionado.ciudad}
+                  </p>
+                </div>
+                <div className="modal-footer btn-cerrar">
+                  <button
+                    type="button"
+                    className="btn btn-secondary"
+                    data-bs-dismiss="modal"
+                  >
+                    Cerrar
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        )}
       </div>
     </section>
   )

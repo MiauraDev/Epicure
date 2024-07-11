@@ -1,9 +1,9 @@
+import './MainHeader.css'
 function MainHeader() {
   return (
     <header>
-      <div className="container">
-        <h1>Ideas Digitales</h1>
-        <p>Vine, vi y venci </p>
+      <div className="container MainHeader">
+        <h1>Epicure</h1>
       </div>
     </header>
   )

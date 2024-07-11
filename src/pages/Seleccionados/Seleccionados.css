@@ -1,0 +1,10 @@
+.button{
+    background-color: var(--primary);
+}
+
+.button:hover,
+.button:focus,
+.button:active {
+  background-color: var(--color-gris-oscuro) !important;
+  border-color: var(--color-gris-oscuro) !important;
+}

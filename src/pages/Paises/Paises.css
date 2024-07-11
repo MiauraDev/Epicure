@@ -1,0 +1,60 @@
+.modal-paises {
+  background-color: var(--color-blanco); 
+  padding-inline: 30px;
+}
+
+.newPais {
+    background-color: var(--primary);
+    border-color: var(--primary);
+  }
+  
+  .newPais:hover,
+  .newPais:focus,
+  .newPais:active {
+    background-color: var(--color-gris-oscuro) !important;
+    border-color: var(--color-gris-oscuro) !important;
+    
+  }
+  
+  .btn-secondary{
+    background-color: var(--color-gris-oscuro);
+    border-color: var(--color-gris-oscuro);
+  }
+
+  .btn-secondary:hover,
+  .btn-secondary:focus,
+  .btn-secondary:active{
+    background-color: var(--primary);
+    border-color: var(--primary);
+  }
+
+  .btn-primary{
+    background-color: var(--primary);
+    border-color: var(--primary);
+  }
+
+  .guardar{
+    display: flex;
+    justify-content: center;
+  }
+
+  .btn-primary:hover,
+  .btn-primary:focus,
+  .btn-primary:active{
+    background-color: var(--color-gris-oscuro);
+    border-color: var(--color-gris-oscuro);
+  }
+
+  .paises h3{
+    padding-top: 10px;
+    text-align: center;
+  }
+
+  .modal{
+    padding-bottom: 20px;
+  }
+
+  .table-container {
+    overflow-x: auto;
+    width: 100%;
+  }

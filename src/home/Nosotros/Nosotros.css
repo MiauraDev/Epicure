@@ -1,4 +1,45 @@
 #nosotros {
-  background-color: var(--color5);
+  background-color: var(--primary);
   color: var(--color-blanco);
+}
+
+#nosotros strong {
+  text-transform: uppercase;
+}
+
+.content {
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+}
+
+.content .text {
+  text-align: center;
+}
+
+.content .image {
+  text-align: center;
+}
+
+.content img {
+  width: 100%;
+}
+
+@media (min-width: 770px) {
+  .content {
+    flex-direction: row;
+    gap: 40px;
+  }
+
+  .content .text {
+    text-align: left;
+  }
+
+  .content .image {
+    text-align: left;
+  }
+
+  .content img {
+    width: 500px;
+  }
 }

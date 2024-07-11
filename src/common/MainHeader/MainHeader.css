@@ -1,0 +1,13 @@
+.MainHeader{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-transform: uppercase; 
+    padding-top: 20px;
+}
+
+.MainHeader h1{
+    letter-spacing: 2px;
+    font-weight: 400;
+    color: var(--primary);
+}

@@ -1,3 +1,5 @@
+import React from 'react'
+import './MainBanner.css'
 import slide1 from './../../assets/images/banner1.jpg'
 import slide2 from './../../assets/images/banner2.jpg'
 import slide3 from './../../assets/images/banner3.jpg'
@@ -8,6 +10,7 @@ function MainBanner() {
       id="carouselExampleCaptions"
       className="carousel slide"
       data-bs-ride="carousel"
+      data-bs-interval="6000"
     >
       <div className="carousel-indicators">
         <button
@@ -33,27 +36,46 @@ function MainBanner() {
       </div>
       <div className="carousel-inner">
         <div className="carousel-item active">
-          <img src={slide1} className="d-block w-100" alt="..." />
-          <div className="carousel-caption d-none d-md-block">
-            <h5>First slide label</h5>
-            <p>Some representative placeholder content for the first slide.</p>
+          <img
+            src={slide1}
+            className="d-block w-100"
+            alt="Bienvenido a Epicure"
+          />
+          <div className="carousel-caption d-none d-md-block txtSlider">
+            <h2>Elegancia y distinción en cada plato</h2>
+            <p>
+              Disfruta de una experiencia culinaria inigualable en nuestro
+              elegante restaurante
+            </p>
           </div>
         </div>
         <div className="carousel-item">
-          <img src={slide2} className="d-block w-100" alt="..." />
-          <div className="carousel-caption d-none d-md-block">
-            <h5>Second slide label</h5>
-            <p>Some representative placeholder content for the second slide.</p>
+          <img
+            src={slide2}
+            className="d-block w-100"
+            alt="Gastronomía de Alta Calidad"
+          />
+          <div className="carousel-caption d-none d-md-block txtSlider">
+            <h2>Gastronomía de Alta Calidad</h2>
+            <p>
+              Saborea platos exquisitos preparados por nuestros chefs de
+              renombre
+            </p>
           </div>
         </div>
         <div className="carousel-item">
-          <img src={slide3} className="d-block w-100" alt="..." />
-          <div className="carousel-caption d-none d-md-block">
-            <h5>Third slide label</h5>
-            <p>Some representative placeholder content for the third slide.</p>
+          <img
+            src={slide3}
+            className="d-block w-100"
+            alt="Ambiente Sofisticado"
+          />
+          <div className="carousel-caption d-none d-md-block txtSlider">
+            <h2>Ambiente Sofisticado</h2>
+            <p>Relájate y disfruta en un entorno elegante y acogedor</p>
           </div>
         </div>
       </div>
+
       <button
         className="carousel-control-prev"
         type="button"

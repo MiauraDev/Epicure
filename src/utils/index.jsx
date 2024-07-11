@@ -1,26 +1,17 @@
 export const ApiWebURL = 'https://servicios.campus.pe/'
 
-export const agregarCarrito = (item, cantidadProducto) => {
-  item.cantidad = Number(cantidadProducto)
-  item.precio = item.preciorebajado === '0' ? item.precio : item.preciorebajado
-  console.log(item)
+export const agregarEmpleadosSeleccionados = (empleadosSeleccionados) => {
   let carrito = []
-  if (sessionStorage.getItem('carritocompras')) {
-    carrito = JSON.parse(sessionStorage.getItem('carritocompras'))
-    let index = -1
-    for (let i = 0; i < carrito.length; i++) {
-      if (item.idproducto === carrito[i].idproducto) {
-        index = i
-        break
+  if (sessionStorage.getItem('empleadosSeleccionados')) {
+    carrito = JSON.parse(sessionStorage.getItem('empleadosSeleccionados'))
+    empleadosSeleccionados.forEach((empleado) => {
+      let index = carrito.findIndex((e) => e.idempleado === empleado.idempleado)
+      if (index === -1) {
+        carrito.push(empleado)
       }
-    }
-    if (index === -1) {
-      carrito.push(item)
-    } else {
-      carrito[index].cantidad += Number(cantidadProducto)
-    }
+    })
   } else {
-    carrito.push(item)
+    carrito = [...empleadosSeleccionados]
   }
-  sessionStorage.setItem('carritocompras', JSON.stringify(carrito))
+  sessionStorage.setItem('empleadosSeleccionados', JSON.stringify(carrito))
 }

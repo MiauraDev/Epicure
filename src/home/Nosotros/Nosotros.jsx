@@ -1,25 +1,49 @@
+import React, { useEffect } from 'react'
 import './Nosotros.css'
+import nosotros from '../../assets/images/nosotros.jpg'
+import 'aos/dist/aos.css'
+import AOS from 'aos'
+
 function Nosotros() {
+  useEffect(() => {
+    AOS.init({ duration: 1200 })
+  }, [])
+
   return (
     <section id="nosotros" className="padded">
       <div className="container">
-        <h2>Nosotros</h2>
-        <p>
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Obcaecati,
-          distinctio ex iste fugit magnam dolorum laborum sit, quaerat
-          praesentium voluptatibus eaque. Fugiat enim hic atque odit, nostrum ab
-          temporibus rerum deserunt, eum exercitationem reiciendis adipisci
-          maiores voluptates pariatur similique ad nobis asperiores eligendi,
-          quisquam aliquam. Atque numquam nemo iusto rerum incidunt assumenda,
-          corrupti excepturi dignissimos vitae repudiandae accusamus praesentium
-          dolorem autem sunt eligendi perspiciatis velit! Esse nam culpa numquam
-          beatae excepturi harum praesentium architecto, inventore ducimus
-          debitis doloremque ratione explicabo dicta adipisci earum sunt iure
-          nesciunt, corporis eos officiis. Recusandae voluptatum similique omnis
-          numquam vero, dolorem alias ipsam, ducimus odio quia exercitationem!
-          Est illum non cumque earum possimus quos eos amet, maxime at
-          voluptatem vitae. Aspernatur velit accusamus tempora ipsam.
-        </p>
+        <div className="content">
+          <div className="text">
+            <h2>Sobre Nosotros</h2>
+            <p>
+              En <strong>Epicure</strong>, somos un equipo apasionado por la
+              excelencia culinaria y el arte de la hospitalidad. Nuestro
+              restaurante se erige como un templo de la alta gastronomía, donde
+              cada plato es una creación única e inigualable.
+            </p>
+            <p>
+              Inspirados por la diversidad cultural y la riqueza de los sabores
+              globales, nos embarcamos en un viaje culinario que celebra la
+              tradición y la innovación. Nuestro equipo, compuesto por chefs y
+              expertos en gastronomía de renombre, trabaja incansablemente para
+              ofrecer una experiencia sensorial inigualable a cada comensal.
+            </p>
+            <p>
+              En Epicure, valoramos la conexión con la tierra y los productores
+              locales. Nuestra misión es resaltar los ingredientes de origen
+              sostenible, respetando la estacionalidad y el entorno. Cada visita
+              a nuestro restaurante es una oportunidad para descubrir nuevas
+              historias y sabores, presentados con elegancia y dedicación.
+            </p>
+            <p>
+              Bienvenido a Epicure, donde cada detalle cuenta y cada comida es
+              una celebración.
+            </p>
+          </div>
+          <div className="image" data-aos="zoom-in-down">
+            <img src={nosotros} alt="nosotros" />
+          </div>
+        </div>
       </div>
     </section>
   )

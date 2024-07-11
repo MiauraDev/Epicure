@@ -1,0 +1,113 @@
+#pedidos.padded {
+  padding: 0;
+  padding-bottom: 90px;
+}
+
+.page-link {
+  color: var(--primary);
+}
+
+.page-link:hover {
+  color: var(--color-gris-oscuro);
+}
+
+.page-item.active a {
+  background-color: var(--primary);
+  border-color: var(--primary);
+  color: var(--color-blanco);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.page-item a:hover {
+  background-color: var(--color-gris-oscuro);
+  border-color: var(--color-gris-oscuro);
+  color: var(--color-blanco);
+}
+
+.page-item.active a,
+.page-item a:focus {
+  background-color: var(--color-gris-oscuro);
+  border-color: var(--color-gris-oscuro);
+  color: var(--color-blanco);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.table {
+  background-color: var(--color-blanco);
+  padding-top: 90px;
+  width: 100%; 
+}
+
+
+.table-container {
+  overflow-x: auto;
+  width: 100%;
+}
+
+.personas {
+  font-size: 80px;
+  font-weight: 600;
+}
+
+.cliente {
+  font-size: 20px;
+  font-weight: 600;
+  margin-top: 10px; 
+}
+
+
+@media (min-width: 770px) {
+  .pedidos {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    justify-content: space-between;
+    gap: 80px;
+    width: 100%;
+  }
+}
+
+.eye {
+  display: flex;
+  justify-content: start;
+  padding: 0px;
+  padding-inline: 4px;
+}
+
+.eyes {
+  color: var(--primary);
+  font-size: 16px;
+}
+
+.eyes:hover {
+  color: var(--color-negro);
+}
+
+.modal-proveedores {
+  padding-inline: 22px;
+}
+
+.modal-header {
+  display: flex;
+  justify-content: center;
+  text-align: center;
+  align-items: center;
+}
+
+.name-empresa {
+  font-size: 20px;
+  font-weight: 600;
+  color: var(--primary);
+}
+
+.btn-cerrar {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.btn-cerrar button:hover,
+.btn-cerrar button:focus,
+.btn-cerrar button:active {
+  background-color: var(--primary) !important;
+  border-color: var(--primary) !important;
+}
